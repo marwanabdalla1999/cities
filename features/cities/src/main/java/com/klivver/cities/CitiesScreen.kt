@@ -30,7 +30,7 @@ fun CitiesScreen(
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
-    LaunchedEffect(key1 = Unit) {
+    LaunchedEffect(Unit) {
         effects.collect {
             when (it) {
                 is CitiesSideEffect.OpenMap -> {
@@ -48,8 +48,8 @@ fun CitiesScreen(
     }
 
     Scaffold(modifier = modifier, content = { paddingValues ->
-        if (state.isLoading) LoadingState()
-        else if (state.cities.isEmpty()) EmptyState()
+        if (state.isLoading) LoadingState(modifier = Modifier.padding(paddingValues).imePadding())
+        else if (state.cities.isEmpty()) EmptyState(modifier = Modifier.padding(paddingValues).imePadding())
         else {
             CitySearchContent(
                 cities = state.cities,

@@ -1,6 +1,7 @@
 package com.klivver.ui.composeUi
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -21,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.klivver.ui.R
 
@@ -30,40 +32,37 @@ fun SearchBar(
     onSearch: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // Track focus for color/elevation changes
     var focused by remember { mutableStateOf(false) }
 
-    val bg by animateColorAsState(
-        targetValue = if (focused) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else Color.White,
-        animationSpec = tween(300)
-    )
     val elev by animateDpAsState(
         targetValue = if (focused) 8.dp else 2.dp,
-        animationSpec = tween(300)
+        animationSpec = tween(durationMillis = 300)
     )
 
+
     Surface(
-        modifier = modifier.clip(RoundedCornerShape(10.dp)),
-        tonalElevation = elev
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp)),
+        tonalElevation = elev,
+        color = Color.White
     ) {
         TextField(
             value = query,
+            onValueChange = onSearch,
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-            onValueChange = {
-                onSearch(it)
-            },
             placeholder = { Text(stringResource(R.string.search)) },
             singleLine = true,
+
             colors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-
+                unfocusedIndicatorColor = Color.Transparent
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged { focused = it.isFocused }
-                .background(bg)
-                .padding(horizontal = 16.dp, vertical = 30.dp)
+                .padding(horizontal = 16.dp, vertical = 20.dp)
         )
-
     }
-} 
+}

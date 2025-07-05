@@ -14,12 +14,12 @@ import com.klivver.cities.models.City
 
 @Composable
 fun CityList(
-    cities: List<City>, onSelect: (City) -> Unit
+    cities: List<City>, modifier: Modifier = Modifier,onSelect: (City) -> Unit
 ) {
     val grouped = cities.groupBy { it.name.first().uppercaseChar() }
     Box {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .padding(start = 40.dp)
                 .fillMaxHeight()
                 .width(2.dp)
