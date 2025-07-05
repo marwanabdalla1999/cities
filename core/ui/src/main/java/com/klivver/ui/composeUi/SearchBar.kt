@@ -37,8 +37,9 @@ fun SearchBar(
 
     val elev by animateDpAsState(
         targetValue = if (focused) 8.dp else 2.dp,
-        animationSpec = tween(durationMillis = 300)
+        animationSpec = tween(durationMillis = 1000)
     )
+
 
 
     Surface(
@@ -54,10 +55,10 @@ fun SearchBar(
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             placeholder = { Text(stringResource(R.string.search)) },
             singleLine = true,
-
             colors = TextFieldDefaults.colors(
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedContainerColor = Color.White,
             ),
             modifier = Modifier
                 .fillMaxWidth()
