@@ -21,16 +21,15 @@ A fast, offline-first Android app for searching and exploring global cities. Bui
 The app follows a layered **clean architecture** with **MVI pattern**:
 
 presentation/
-
 CitiesViewModel
 CitiesViewState / Event / SideEffect
 UI Composables
-domain/
 
+domain/
 City (domain model)
 UseCases (LoadCities, SearchCities)
-data/
 
+data/
 CityDto
 CityRepositoryImpl
 CityLocalDataSource (preloaded & indexed in memory)
@@ -46,3 +45,15 @@ CityLocalDataSource (preloaded & indexed in memory)
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/your-org/klivvr-cities.git
+
+2. Open in Android Studio
+Make sure you’re using Android Studio Hedgehog or newer with Kotlin 2.1+ support.
+
+3. Run the app
+Minimum SDK: 29
+Target SDK: 35
+4. Assets
+Ensure cities.json is placed under:
+/assets/cities.json
+
+This file contains ~200,000 city entries and is parsed locally on first load.
