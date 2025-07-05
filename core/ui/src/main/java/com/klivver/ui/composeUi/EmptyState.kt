@@ -12,9 +12,8 @@ import com.klivver.ui.R
 
 @Composable
 fun EmptyState() {
-    AnimatedVisibility(true) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text(stringResource(R.string.no_cities_found))
         }
-    }
+
 } 

@@ -13,6 +13,19 @@ import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * A local data source that loads and provides in-memory access to city data
+ * from a static JSON file stored in the app's assets.
+ *
+ * It supports efficient prefix-based search using binary search on a pre-sorted list.
+ *
+ * This class ensures:
+ * - The city list is only loaded once (idempotent `preloadCities()`).
+ * - Sorting is done in a background dispatcher.
+ * - Search is performed efficiently and off the main thread.
+ *
+ * @property context Android application context for accessing assets
+ */
 
 class CityLocalDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context
@@ -42,11 +55,26 @@ class CityLocalDataSourceImpl @Inject constructor(
         isLoaded = true
     }
 
+    /**
+     * Returns the full list of cities loaded in memory.
+     *
+     * @throws IllegalStateException if [preloadCities] has not been called yet
+     */
     override fun getAllCities(): List<CityDto> {
         check(isLoaded) { YOU_MUST_CALL_PRELOADED_FIRST }
         return cityList
     }
 
+    /**
+     * Searches for cities whose names start with the given [prefix].
+     *
+     * This is a case-insensitive prefix match. It uses binary search to find the
+     * first matching city, then iterates forward to collect all results.
+     *
+     * @param prefix the string to search for at the beginning of city names
+     * @return a list of [CityDto] matching the prefix
+     * @throws IllegalStateException if [preloadCities] has not been called yet
+     */
     override suspend fun searchCitiesByPrefix(prefix: String): List<CityDto> {
         check(isLoaded) { YOU_MUST_CALL_PRELOADED_FIRST }
 

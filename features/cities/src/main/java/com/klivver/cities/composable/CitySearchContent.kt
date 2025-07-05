@@ -1,6 +1,5 @@
 package com.klivver.cities.composable
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +18,6 @@ fun CitySearchContent(
     setEvent: (CitiesViewEvent) -> Unit,
     modifier: Modifier
 ) {
-    AnimatedVisibility(true) {
     Column(modifier = modifier.fillMaxSize().padding(16.dp)) {
         Text(
             text = "City Search",
@@ -43,5 +41,5 @@ fun CitySearchContent(
         )
 
     }
-    }
+
 } 

@@ -1,6 +1,5 @@
 package com.klivver.ui.composeUi
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -10,9 +9,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun LoadingState() {
-    AnimatedVisibility(true) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
-    }
+
 } 

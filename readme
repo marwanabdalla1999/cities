@@ -1,0 +1,48 @@
+# 🌍 Klivvr Cities Android App
+
+A fast, offline-first Android app for searching and exploring global cities. Built using Jetpack Compose, Kotlin, Hilt, and clean architecture principles.
+
+---
+
+## ✨ Features
+
+- 🔍 **Prefix-based city search** with debounced input
+- ⚡ Instant in-memory search across 200k+ cities using optimized indexing
+- 📍 **Open city in Google Maps** with one tap
+- 🎨 Clean modern UI using **Jetpack Compose**
+- 🔄 Pull-to-refresh support
+- 🌐 Country flags via emoji or drawable fallback
+- 🧪 Modular, testable code using clean architecture principles
+
+---
+
+## 🧱 Architecture
+
+The app follows a layered **clean architecture** with **MVI pattern**:
+
+presentation/
+
+CitiesViewModel
+CitiesViewState / Event / SideEffect
+UI Composables
+domain/
+
+City (domain model)
+UseCases (LoadCities, SearchCities)
+data/
+
+CityDto
+CityRepositoryImpl
+CityLocalDataSource (preloaded & indexed in memory)
+
+
+- **State-driven UI**: using `ViewState`, `ViewEvent`, and `SideEffect` contracts.
+- **DI with Hilt**: for injecting use cases, repositories, and data sources.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-org/klivvr-cities.git
